@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [drivingHours, setDrivingHours] = useState(0);
+  const [restHours, setRestHours] = useState(0);
+
+  const addDrivingHour = () => {
+    setDrivingHours(drivingHours + 1);
+    checkCompliance();
+  };
+
+  const addRestHour = () => {
+    setRestHours(restHours + 1);
+    checkCompliance();
+  };
+
+  const checkCompliance = () => {
+    if (drivingHours >= 11) {
+      alert('You have reached the maximum driving hours. Take a break!');
+    }
+    if (restHours <= 1) {
+      alert('You need more rest hours for compliance.');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hours of Service Compliance Helper</h1>
+      <p>Driving Hours: {drivingHours}</p>
+      <button onClick={addDrivingHour}>Add Driving Hour</button>
+      <p>Rest Hours: {restHours}</p>
+      <button onClick={addRestHour}>Add Rest Hour</button>
     </div>
   );
-}
+};
 
 export default App;
